@@ -1,7 +1,5 @@
 import java.io.*;
 import java.net.Socket;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Client {
@@ -16,19 +14,22 @@ public class Client {
         Socket socket = new Socket("127.0.0.1", port);
         System.out.println("Connection established");
 
+        // create in / out
         BufferedReader inClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         PrintWriter outClient = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 
-        // todo: implement the scenario
-        
-        Scanner msg = new Scanner(System.in);
-        System.out.println("Write your message: ");
-        String mymsg = msg.nextLine();
-        outClient.println(mymsg);
-        
-        String resultat= inClient.readLine();
-        System.out.println(resultat);
-        
+        //implementing the scenario
+
+        Scanner obj = new Scanner(System.in);
+        String s = obj.nextLine();
+        outClient.println(s);
+
+        String ch = inClient.readLine();
+        System.out.println(ch);
+
+        obj.close();
+
+        //close in / out
         inClient.close();
         outClient.close();
 
